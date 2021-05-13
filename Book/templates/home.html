@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book</title>
+</head>
+
+<body>
+     <h1 style="color: red; font-size: 50 ;">Library</h1><hr>
+
+     <!-- {% for b in books %}
+        {{b.id}} --------- {{b.name}}<br>
+
+     {% endfor %} -->
+
+    <h3>Book Form</h3>
+     <form action="/save-book/" method="post">
+        {% csrf_token %}
+        Book Name: <input type="text" name="name" value="{{book.name}}"><br><br>
+        Book Auther: <input type="text" name="auth" value="{{book.auther}}"><br><br>
+        Book Qty: <input type="number" name="qty" value="{{book.qty}}"><br><br>
+        Book Price: <input type="number" name="price" value="{{book.price}}"><br><br>
+        <!-- Book Published: <input type="radio" name="pub" value="{{book.is_pblished}}"><br><br> -->
+        
+        {% if book.is_published %} 
+            Book Published: <input type="checkbox" name="pub" checked><br><br>
+        {% else %}
+            Book Published: <input type="checkbox" name="pub"><br><br>
+        {% endif %}
+
+        <input type="submit" name="Submit Book">
+     </form><hr>
+
+     
+    
+    <hr>
+
+    <h3>ALL BOOKS</h3> <a href="/show-deleted-data/" >Show Deleted Data</a> <a href="/home/" >Home Page</a> <br>
+     <table border = "2">
+
+        <thead>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>AUTHER</th>
+            <th>QUANTITY</th>
+            <th>PRICE</th>
+            <th>IS_PUBLISHED</th>
+            <th>Actions</th>
+        </thead>
+
+        <tbody>
+            {% for b in books %}
+                <tr>
+                    <td>{{b.id}}</td>
+                    <td>{{b.name}}</td>
+                    <td>{{b.auther}}</td>
+                    <td>{{b.qty}}</td>
+                    <td>{{b.price}}</td>
+                    <td>{{b.is_published}}</td>
+                    <td>
+                        {% ifequal b.is_deleted "Y" %}
+                        <!-- <a href="/h-delete-book/{{b.id}}/" class="btn btn-danger" role="button">HardDelete</a> -->
+                        <a href="/h-delete-book/{{b.id}}/" >HardDelete</a> |
+                        <a href="/restore/{{b.id}}/" >Restore</a> 
+
+                        {% endifequal %}
+
+                        {% ifequal b.is_deleted "N" %}
+                        <a href="/delete-book/{{b.id}}/" >SoftDelete</a> |
+                        <a href="/edit-book/{{b.id}}/" >Edit</a> 
+                        {% endifequal  %}
+                        
+                        <!-- <a href = "/edit-book/{{b.id}}/">Edit</a> ||
+                        <a href = "/delete-book/{{b.id}}/">Delete</a> -->
+                    </td>
+                </tr>
+            {% endfor %}
+
+        </tbody>
+
+     </table>
+     
+</body>
+
+</html>
