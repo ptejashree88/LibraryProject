@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-eju%&3sah8zk@@hv0f$f+o05=0)tg!km==7uufvmt-@&$e40hn
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["tejashree.pythonanywhere.com"]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -85,10 +85,10 @@ WSGI_APPLICATION = 'Library.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'tejashree$NewLib',
-        'USER': 'tejashree',
-        'PASSWORD': 'tejvir8590',
-        'HOST': 'tejashree.mysql.pythonanywhere-services.com',   # Or an IP Address that your DB is hosted on
+        'NAME': 'library',
+        'USER': 'root',
+        'PASSWORD': 'tejvir',
+        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
     }
 }
